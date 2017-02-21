@@ -1,0 +1,66 @@
+<form #eventoForm="ngForm" *ngIf="mostrar">
+    <section class="form-block">
+        <h3>Datos del Evento</h3>
+        <div class="form-group">
+            <label for="nombre">Nombre del Evento</label>
+            <label for="nombre"
+                aria-haspopup="true"
+                role="tooltip"
+                class="tooltip tooltip-validation tooltip-md"
+                [class.invalid]="nombreInput.invalid && (nombreInput.dirty || nombreInput.touched)">
+                <input type="text" id="nombre" placeholder="Ingrese Nombre del evento"
+                    required
+                    UppercaseInput
+                    name="nombre"
+                    [(ngModel)]="evento.title"
+                    #nombreInput="ngModel"
+                    style="width:280px">
+                <span class="tooltip-content">
+                    Nombre del evento es requerido.
+                </span>
+            </label>
+        </div>
+        <div class="form-group">
+            <label for="fecha_inicio">Fecha Inicio</label>
+            <label for="fecha_inicio"
+                aria-haspopup="true"
+                role="tooltip"
+                class="tooltip tooltip-validation tooltip-md"
+                [class.invalid]="fecha_inicioInput.invalid && (fecha_inicioInput.dirty || fecha_inicioInput.touched)">
+                <input type="date" id="fecha_inicio"
+                    required
+                    name="fecha_inicio"
+                    [(ngModel)]="evento.start"
+                    #fecha_inicioInput="ngModel">
+                <span class="tooltip-content">
+                    Fecha inicio es requerida
+                </span>
+            </label>
+        </div>
+        <div class="form-group">
+            <label for="fecha_fin">Fecha fin</label>
+            <label for="fecha_fin"
+                aria-haspopup="true"
+                role="tooltip"
+                class="tooltip tooltip-validation tooltip-md"
+                [class.invalid]="fecha_finInput.invalid && (fecha_finInput.dirty || fecha_finInput.touched)">
+                <input type="date" id="fecha_fin"
+                    required
+                    name="fecha_fin"
+                    [(ngModel)]="evento.end"
+                    #fecha_finInput="ngModel">
+                <span class="tooltip-content">
+                    Fecha fin es requerida
+                </span>
+            </label>
+        </div>
+        <div class="form-group">
+            <label for="observacion">Observación</label>
+            <textarea name="observacion" [(ngModel)]="evento.observation" rows="5"></textarea>
+        </div>
+        
+        <button class="btn btn-primary" (click)="agregar();cerrarForm()"
+            [disabled]="eventoForm.form.invalid" type="button">Agregar</button>
+        <button class="btn btn-outline" type="button" (click)="cerrarForm()">Volver</button>
+    </section>
+</form>

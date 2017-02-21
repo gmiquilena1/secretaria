@@ -1,0 +1,9 @@
+<button class="btn btn-sm" (click)="agregarMiembro()">Agregar</button>
+<button class="btn btn-primary btn-sm" (click)="editarMiembro()" [ngClass]="{'disabled' : selected==null}">Editar</button>
+<p-dataTable [value]="listaMiembros" selectionMode="single" [(selection)]="selected">
+  <p-column field="nombre" header="Nombre"></p-column>
+  <p-column field="apellido" header="Apellido"></p-column>
+  <p-column field="cedula" header="Cedula"></p-column>
+  <p-column field="telefono" header="Telefono"></p-column>
+  <p-column field="fecha_nacimiento" header="Fecha de Nacimiento"></p-column>
+</p-dataTable>
