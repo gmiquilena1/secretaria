@@ -14,6 +14,7 @@ import 'rxjs/add/operator/switchMap';
 })
 export class FormMiembroComponent implements OnInit {
 
+  title: string;
   miembro: Miembro;
   id: string;
 
@@ -30,8 +31,14 @@ export class FormMiembroComponent implements OnInit {
       .switchMap((params: Params) => this._miembrosService.getMiembro(params['id']))
       .subscribe(miembro => this.miembro = miembro);
 
-     if(!this.id)
-      this.miembro = new Miembro(); 
+     if(!this.id){
+      this.miembro = new Miembro();
+      this.title = "Nuevo Miembro";
+     }
+     else
+     {
+        this.title = "Editar Miembro";
+     } 
   }
 
   volver(): void{
@@ -46,11 +53,9 @@ export class FormMiembroComponent implements OnInit {
     if(this.miembro.cedula)
        this.miembro.cedula=this.miembro.cedula.toUpperCase();
     
-    console.log(this.miembro);
-
-    if(this.id)    
+    if(this.id) //si existe se actualiza    
       this._miembrosService.updateMiembro(this.id,this.miembro);
-    else
+    else // si no se agrega
       this._miembrosService.addMiembro(this.miembro);      
     
   }
