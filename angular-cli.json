@@ -33,11 +33,12 @@
                 "../node_modules/moment/min/moment.min.js",
                 "../node_modules/fullcalendar/dist/fullcalendar.min.js"
             ],
+            "environmentSource": "environments/environment.ts",
             "environments": {
-                "source": "environments/environment.ts",
-                "dev": "environments/environment.ts",
-                "prod": "environments/environment.prod.ts"
+            "dev": "environments/environment.ts",
+            "prod": "environments/environment.prod.ts"
             }
+
         }
     ],
     "addons": [],

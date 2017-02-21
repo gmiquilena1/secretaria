@@ -30,6 +30,7 @@ import { FormMiembroComponent } from './components/miembros/form-miembro/form-mi
 
 import { MinisteriosComponent } from './components/ministerios/ministerios.component';
 import { ArchivosComponent } from './components/archivos/archivos.component';
+import { MaskInputDirective } from './directives/mask-input.directive';
 
 @NgModule({
     declarations: [
@@ -42,7 +43,8 @@ import { ArchivosComponent } from './components/archivos/archivos.component';
         UppercaseInputDirective,
         FormEventoComponent,
         MiembrosComponent,
-        SchedulerComponent
+        SchedulerComponent,
+        MaskInputDirective
     ],
     imports: [
         BrowserModule,

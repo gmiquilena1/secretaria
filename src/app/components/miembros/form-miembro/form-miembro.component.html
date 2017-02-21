@@ -39,13 +39,18 @@
         </div>
         <div class="form-group">
             <label for="cedula">Cedula</label>
-            <p-inputMask mask="a-99999999" [(ngModel)]="miembro.cedula"
-            name="cedula" placeholder="v-99999999"></p-inputMask>
+            <!--<p-inputMask mask="a-99999999" [(ngModel)]="miembro.cedula"
+            name="cedula" placeholder="v-99999999"></p-inputMask>-->
+            <input type="text" MaskInput="V-00000000" [(ngModel)]="miembro.cedula"
+            name="cedula" placeholder="V-00000000"/>
         </div>
         <div class="form-group">
             <label for="telefono">Telefono</label>
-            <p-inputMask name="telefono" [(ngModel)]="miembro.telefono" mask="(9999) 999-9999" 
-            placeholder="(9999) 999-9999"></p-inputMask>
+            <!--<p-inputMask name="telefono" [(ngModel)]="miembro.telefono" mask="(9999) 999-9999" 
+            placeholder="(9999) 999-9999"></p-inputMask>-->
+            <input type="text" MaskInput="(0000) 000-0000" [(ngModel)]="miembro.telefono"
+            name="telefono" placeholder="(0000) 000-0000"/>
+            {{miembro.telefono}}
         </div>
         <div class="form-group">
             <label for="fecha_nacimiento">Fecha de Nacimiento</label>
