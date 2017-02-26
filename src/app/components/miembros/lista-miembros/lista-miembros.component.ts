@@ -21,11 +21,11 @@ export class ListaMiembrosComponent implements OnInit {
   }
 
   agregarMiembro(): void{
-    this.router.navigate(['/miembros/miembro']);
+    this.router.navigate(['/miembro']);
   }
 
   editarMiembro(): void{
-    this.router.navigate(['/miembros/miembro',this.selected.$key]);
+    this.router.navigate(['/miembro',this.selected.$key]);
   }
 
   eliminarMiembro(){

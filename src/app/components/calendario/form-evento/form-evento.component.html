@@ -1,6 +1,6 @@
-<form #eventoForm="ngForm" *ngIf="mostrar">
+<form #eventoForm="ngForm">
     <section class="form-block">
-        <h3>Datos del Evento</h3>
+        <h3><clr-icon shape="event" size="24"></clr-icon> {{title}}</h3>
         <div class="form-group">
             <label for="nombre">Nombre del Evento</label>
             <label for="nombre"
@@ -59,8 +59,9 @@
             <textarea name="observacion" [(ngModel)]="evento.observation" rows="5"></textarea>
         </div>
         
-        <button class="btn btn-primary" (click)="agregar();cerrarForm()"
+        <button class="btn btn-primary" (click)="agregar();volver()"
             [disabled]="eventoForm.form.invalid" type="button">Agregar</button>
-        <button class="btn btn-outline" type="button" (click)="cerrarForm()">Volver</button>
+        <button class="btn btn-danger" type="button" *ngIf="id" (click)="eliminar();volver()">Eliminar</button>
+        <button class="btn btn-outline" type="button" (click)="volver()">Volver</button>
     </section>
 </form>

@@ -1,9 +1,9 @@
 <div class="content-container">
     <div class="content-area">
-    <form-evento [mostrar]="agregarEvento" [evento]="evento" (change)="agregarChange($event)"></form-evento>    
-    <div class="div-calendar" *ngIf="!agregarEvento">        
-        <p-schedule [events]="events" [header]="header" defaultDate="2017-02-01" [eventLimit]="4" [editable]="true"
-            (onDayClick)="handleDayClick($event)" (onEventClick)="handleEventClick($event)"></p-schedule>
+    <div class="div-calendar">        
+        <p-schedule [events]="events" [locale]="es" [header]="header" defaultDate="2017-02-01" [eventLimit]="4" 
+        [editable]="true" (onDayClick)="handleDayClick($event)" (onEventClick)="handleEventClick($event)"
+        (onEventDrop)="handleEventDrop($event)"></p-schedule>
     </div>
     </div>
 </div>

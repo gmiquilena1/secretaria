@@ -21,10 +21,8 @@ import { EventosService } from './services/eventos.service';
 import { AppComponent } from './app.component';
 
 import { CalendarioComponent } from './components/calendario/calendario.component';
-import { SchedulerComponent } from './components/calendario/scheduler/scheduler.component';
 import { FormEventoComponent } from './components/calendario/form-evento/form-evento.component';
 
-import { MiembrosComponent } from './components/miembros/miembros.component';
 import { ListaMiembrosComponent } from './components/miembros/lista-miembros/lista-miembros.component';
 import { FormMiembroComponent } from './components/miembros/form-miembro/form-miembro.component';
 
@@ -42,8 +40,6 @@ import { MaskInputDirective } from './directives/mask-input.directive';
         FormMiembroComponent,
         UppercaseInputDirective,
         FormEventoComponent,
-        MiembrosComponent,
-        SchedulerComponent,
         MaskInputDirective
     ],
     imports: [

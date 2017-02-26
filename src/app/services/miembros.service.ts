@@ -23,9 +23,8 @@ miembros: FirebaseListObservable<any[]>;
      this.miembros.push(item);
   }
 
-  updateMiembro(key,item){
-    const itemObservable = this._fbService.getItem('/miembros/'+key);
-    return itemObservable.update(item);
+  updateMiembro(id,item){
+    return this.miembros.update(id,item)
   }
 
   deleteMiembros(id:any){

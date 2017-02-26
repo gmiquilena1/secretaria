@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { EventosService } from '../../../services/eventos.service';
 import { Evento } from '../../../models/evento';
 
@@ -9,37 +10,51 @@ import { Evento } from '../../../models/evento';
 })
 export class FormEventoComponent implements OnInit {
 
-  @Input()
-  mostrar: boolean;
-
-  @Input()
   evento: Evento;
+  title: String;
+  id: string;
+  fecha: string;
 
-  @Output()
-  change: EventEmitter<boolean> = new EventEmitter<boolean>();
-
-  constructor(private _eventosService:EventosService) { }
+  constructor(private _eventosService:EventosService,
+              private router:Router,
+              private activatedRoute:ActivatedRoute) { }
 
   ngOnInit() {
+    this.id = null;
     
+    this.activatedRoute.params.subscribe(params => this.id=params['id']);
+
+    this.activatedRoute.params
+      .switchMap((params: Params) => this._eventosService.getEvento(params['id']))
+      .subscribe(evento => this.evento = evento);
+
+     if(!this.id){
+      this.evento = new Evento();
+      this.title = "Nuevo Evento";
+      this.activatedRoute.params.subscribe(params => {
+        this.evento.start=params['fecha'];
+        this.evento.end=params['fecha'];
+      });
+     }
+     else
+     {
+        this.title = "Editar Evento";
+     } 
   }
 
-  cerrarForm(): void{
-    this.mostrar = false;
-    this.change.emit(this.mostrar);
+  volver(): void{
+    this.router.navigate(['/calendario']);
+  }
+
+  eliminar(): void{
+    this._eventosService.deleteEvento(this.id);
   }
 
   agregar():void{
     this.evento.title = this.evento.title.toUpperCase();
     
-    if(this.evento.id){
-      let auxEvento = new Evento();
-      auxEvento.title = this.evento.title;
-      auxEvento.start = this.evento.start;
-      auxEvento.end = this.evento.end;
-      auxEvento.allDay = this.evento.allDay;
-      auxEvento.observation = this.evento.observation;
-      this._eventosService.updateEvento(this.evento.id,auxEvento);
+    if(this.id){
+      this._eventosService.updateEvento(this.id,this.evento);
     }
     else
     {

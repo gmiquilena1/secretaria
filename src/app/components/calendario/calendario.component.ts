@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Evento } from '../../models/evento';
 import { EventosService } from '../../services/eventos.service';
 
@@ -10,63 +11,56 @@ import { EventosService } from '../../services/eventos.service';
 })
 export class CalendarioComponent implements OnInit {
 
-	agregarEvento: boolean;
+	es: any;
 	evento: Evento;
 	header: any;
-	events: any[];
+	events: any[] = [];
 
-	constructor(private _eventosService:EventosService) { }
+	constructor(private _eventosService:EventosService,
+	              private router:Router) { }
 
 	ngOnInit() {
-		this.agregarEvento = false;
-	
+
+		this.es = {
+            monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio',
+                'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
+        };
+
 		this.header = {
 			left: 'prev,next today',
 			center: 'title',
-			right: 'month,agendaWeek,agendaDay'
+			//right: 'month,agendaWeek,agendaDay'
 		};
 
 		this._eventosService.getEventos()
-		.subscribe(events => this.events=events)
+		.subscribe(events =>{
+			events.forEach(element => {
+				let event = new Evento();
+				event.id=element.$key;
+				event.title=element.title;
+				event.start=element.start;
+				event.end=element.end;
+				event.allDay=element.allDay;
+				this.events.push(event);				
+			});			
+		})
 	}
 
 	handleDayClick(event) {
-		console.log(event.date.format());
-        this.evento = new Evento();
-		this.evento.start = event.date.format();
-		this.evento.end = event.date.format(); 
-		this.agregarEvento = true;
-        
+		this.router.navigate(['/nuevo_evento',event.date.format()]);
         //trigger detection manually as somehow only moving the mouse quickly after click triggers the automatic detection
         // this.cd.detectChanges();
     }
 
 	handleEventClick(e) {
-        this.evento = new Evento();
-        this.evento.title = e.calEvent.title;
-        
-        let start = e.calEvent.start;
-        let end = e.calEvent.end;
-        if(e.view.name === 'month') {
-            start.stripTime();
-        }
-        
-        if(end) {
-            end.stripTime();
-			this.evento.end = end.format();
-        }
-
-        this.evento.id = e.calEvent.$key;
-        this.evento.start = start.format();
-        this.evento.allDay = e.calEvent.allDay;
 		console.log(e.calEvent);
-		this.agregarEvento = true;
+		this.router.navigate(['/editar_evento',e.calEvent.id]);
     }
 
-	agregarChange(event) {
-    	this.agregarEvento = event;
-  	}
-
+	handleEventDrop(event){
+		if (!confirm("Seguro que quieres reprogramar el evento "+event.event.title+"?"))
+			event.revertFunc();
+	}
 
 
 }

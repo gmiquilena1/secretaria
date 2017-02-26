@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FirebaseService } from './firebase.service';
-import { FirebaseListObservable } from 'angularfire2';
+import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
 
 @Injectable()
 export class EventosService {
@@ -13,6 +13,10 @@ export class EventosService {
 
   getEventos():FirebaseListObservable<any[]>{
     return this.eventos;
+  }
+
+  getEvento(key: string):FirebaseObjectObservable<any>{
+    return this._fbService.getItem('/eventos/'+key);
   }
 
   addEvento(item){
