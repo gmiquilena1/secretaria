@@ -1,9 +1,22 @@
 <div class="content-container">
     <div class="content-area">
-    <div class="div-calendar">        
-        <p-schedule [events]="events" [locale]="es" [header]="header" defaultDate="2017-02-01" [eventLimit]="4" 
+    <div class="div-calendar">
+        {{today}}        
+        <p-schedule [events]="events" [header]="header" [eventLimit]="4" 
         [editable]="true" (onDayClick)="handleDayClick($event)" (onEventClick)="handleEventClick($event)"
-        (onEventDrop)="handleEventDrop($event)"></p-schedule>
+        (onEventDrop)="handleEventDrop($event)" (onEventResize)="handleEventResize($event)"
+        (onEventRender)="handleEventRender($event)"></p-schedule>
     </div>
     </div>
 </div>
+
+<clr-modal [(clrModalOpen)]="open_modal">
+    <h3 class="modal-title">Reprogramar Evento</h3>
+    <div class="modal-body">
+        <p>{{textoDialog}}</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline" (click)="cerrarModal()">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="confirmarModal()">Aceptar</button>
+    </div>
+</clr-modal>

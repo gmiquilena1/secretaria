@@ -5,6 +5,7 @@ export class Evento{
     end: string;
     allDay: boolean;
     observation: string;
+    description: string;
 
     constructor(){}
 }
