@@ -13,5 +13,19 @@
 }
 
 body{
-  background-color:lightgray;
+  background-color:#fafafa;
+}
+
+.clr-icon.clr-clarity-logo{
+    background-image: url(./images/clarity_logo.svg);
+}
+
+.login-wrapper {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    background: url(./images/fondo.png);
+    background-size: cover;
+    background-position: 504px 0;
+    background-repeat: no-repeat;
 }

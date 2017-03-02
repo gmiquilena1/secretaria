@@ -1,0 +1,23 @@
+<div class="alert alert-danger" style="margin-top: 0px;" *ngIf="error">
+            <div class="alert-item">
+                <span class="alert-text">
+                    {{mensajeError}}
+                </span>
+            </div>
+        </div>
+<div class="login-wrapper">
+    
+    <form class="login">        
+        <label class="title">
+            Gestión de Secretaría       
+        </label>        
+        <div class="login-group">            
+            <span>Iniciar Sesión</span>
+            <input class="username" type="text" name="user" [(ngModel)]="credenciales.user" placeholder="Nombre de Usuario">
+            <input class="password" type="password" name="pass" [(ngModel)]="credenciales.pass" placeholder="Contraseña">
+            
+            <button type="button" class="btn btn-primary" (click)="login()">ENTRAR</button>
+            
+        </div>
+    </form>
+</div>

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {AngularFire, FirebaseListObservable, AuthMethods, AngularFireAuth, FirebaseObjectObservable, AuthProviders} from 'angularfire2';
+import {AngularFire, FirebaseListObservable, FirebaseAuthState, AuthMethods, AngularFireAuth, FirebaseObjectObservable, AuthProviders} from 'angularfire2';
 
 @Injectable()
 export class FirebaseService {
@@ -7,9 +7,12 @@ export class FirebaseService {
   authData: any;
 
   constructor(private af: AngularFire) {
-    this.af.auth.subscribe(auth => { 
-        this.authData = auth;
-        this.loggedIn = true;
+    this.loggedIn = false;
+    this.af.auth.subscribe(auth => {
+        if(auth!=null){
+          this.authData = auth;
+          this.loggedIn = true;  
+        }        
       });    
   }
 
@@ -21,7 +24,7 @@ export class FirebaseService {
     return this.af.database.list(item);
   }
   
-  login(credenciales:any):any{
+  login(credenciales:any):firebase.Promise<FirebaseAuthState>{
     var creds: any = {email: credenciales.user, password: credenciales.pass};
     return this.af.auth.login(creds, {
           method: AuthMethods.Password,
@@ -39,6 +42,10 @@ export class FirebaseService {
 
   isLoggedIn():boolean{
     return this.loggedIn;
+  }
+
+  setLoggedIn(logged: boolean){
+    return this.loggedIn = logged;
   }
 
 }

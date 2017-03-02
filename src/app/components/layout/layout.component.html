@@ -1,0 +1,22 @@
+
+  
+  <div class="content-container">
+    <nav class="sidenav" [clr-nav-level]="1">
+            <section class="sidenav-content">
+                <section class="nav-group">
+                    <label for="tabexample2">Menú</label>
+                    <ul class="nav-list">
+                        <li><a class="nav-link" [routerLink]="['/miembros']" [routerLinkActive]="['active']">Lista de Miembros</a></li>
+                        <li><a class="nav-link" [routerLink]="['/ministerios']" [routerLinkActive]="['active']">Ministerios</a></li>
+                        <li><a class="nav-link" [routerLink]="['/archivos']" [routerLinkActive]="['active']">Archivos</a></li>
+                        <li><a class="nav-link" [routerLink]="['/calendario']" [routerLinkActive]="['active']">Calendario</a></li>
+                    </ul>
+                </section>
+            </section>
+    </nav>
+    <div class="content-area">
+        <router-outlet></router-outlet>
+    </div>
+  </div>
+
+
