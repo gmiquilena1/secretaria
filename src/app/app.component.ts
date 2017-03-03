@@ -8,12 +8,14 @@ import { FirebaseService } from './services/firebase.service';
     styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+    isLoggedIn:boolean;
+
     constructor(private router: Router, private _firebaseService:FirebaseService) {
-        this._firebaseService.isLoggedIn();
+        this.isLoggedIn = this._firebaseService.isLoggedIn();
     }
 
-    logout(){
-        this._firebaseService.logout();
+    logout(){        
         this.router.navigate(['/login']);
+        this._firebaseService.logout();       
     }
 }

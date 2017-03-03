@@ -7,7 +7,7 @@ export class FirebaseService {
   authData: any;
 
   constructor(private af: AngularFire) {
-    this.loggedIn = false;
+    this.loggedIn = false;    
     this.af.auth.subscribe(auth => {
         if(auth!=null){
           this.authData = auth;
@@ -33,6 +33,7 @@ export class FirebaseService {
   }
 
   logout():any{
+    this.loggedIn = false;
     this.af.auth.logout();    
   }   
 

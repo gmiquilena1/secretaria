@@ -11,7 +11,7 @@
         <input id="search_input" type="text" placeholder="Search for Components...">
       </label>
     </form>-->
-    <div class="header-actions">
+    <div class="header-actions" *ngIf="_firebaseService.loggedIn">
       <a (click)="logout()" class="nav-link nav-text">
             <clr-icon shape="logout"></clr-icon>
         </a>

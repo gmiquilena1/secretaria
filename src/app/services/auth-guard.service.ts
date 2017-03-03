@@ -1,30 +1,28 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot, CanActivateChild } from '@angular/router';
 import { FirebaseService } from './firebase.service';
+import { Observable } from "rxjs/Rx";
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class AuthGuardService implements CanActivate {
-  constructor(private _firebaseService: FirebaseService, private router: Router) {}
+  constructor(private _firebaseService: FirebaseService, private router: Router) { }
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    let url: string = state.url;
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | boolean {
+    return this._firebaseService.getAuth().map((auth) => {
+      if (auth) {
+        console.log('authenticated');
+        return true;
+      }
 
-    return this.checkLogin(url);
+      console.log('not authenticated');
+      this.router.navigate(['/login']);
+      return false;
+    })
+
   }
 
-  canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+  canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | boolean {
     return this.canActivate(route, state);
-  }
-
-  checkLogin(url: string): boolean {
-    console.log("check url "+this._firebaseService.isLoggedIn());
-    if (this._firebaseService.isLoggedIn()) { return true; }
-
-    // Store the attempted URL for redirecting
-    //this.authService.redirectUrl = url;
-
-    // Navigate to the login page with extras
-    this.router.navigate(['/login']);
-    return false;
   }
 }
